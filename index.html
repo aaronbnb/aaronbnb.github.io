@@ -29,7 +29,6 @@
 		image.src = "./book.png";
 		const hints = ["Said in 1776", ]
 		const container = new createjs.Container();
-	 	const hintContainer = new createjs.Container();
 
 		var circle = new createjs.Shape();
 		circle.graphics.beginFill("DeepSkyBlue").drawCircle(0, 0, 50);
@@ -39,7 +38,7 @@
 
 		var roundRect = new createjs.Shape();
 		roundRect.graphics.beginFill("Red").drawRoundRect(250, 250, 100, 100);
-		stage.addChild(roundRect);
+		container.addChild(roundRect);
 
 		stage.addChild(container);
 
