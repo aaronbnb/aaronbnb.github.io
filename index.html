@@ -34,6 +34,9 @@
 		roundRect.graphics.beginStroke("black").drawRoundRect(150,150,100,100,0,0,5,5);
 		stage.addChild(roundRect);
 
+		text = new createjs.Text();
+		text.set({x: stage.canvas.width / 2, y: stage.canvas.height - 40});
+		text.textAlign = "center";
 		text.text = "Click and Drag to Reveal the Image.";
 
 		stage.addChild(text);
