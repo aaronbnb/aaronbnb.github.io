@@ -8,7 +8,14 @@
         // code here.
         var stage = new createjs.Stage("demoCanvas");
         var circle = new createjs.Shape();
-        stage.graphics.beingFill("black");
+
+      	// enable touch interactions if supported on the current device:
+      	createjs.Touch.enable(stage);
+
+      	// enabled mouse over / out events
+      	stage.enableMouseOver(10);
+      	stage.mouseMoveOutside = true; // keep tracking the mouse even when it leaves the canvas
+        stage.graphics.beginFill("black");
         circle.graphics.beginFill("DeepSkyBlue").drawCircle(0, 0, 50);
         circle.x = 100;
         circle.y = 100;
