@@ -4,8 +4,10 @@
 	<meta charset="utf-8">
 	<title>EaselJS Example: Rollovers and Drag & Drop</title>
 
-	<script src="../lib/easeljs-NEXT.combined.js"></script>
-<script src="https://code.createjs.com/easeljs-0.8.2.min.js"></script>
+	<link href="../_assets/css/shared.css" rel="stylesheet" type="text/css"/>
+	<link href="../_assets/css/examples.css" rel="stylesheet" type="text/css"/>
+	<script src="../_assets/js/examples.js"></script>
+
 <script id="editable">
 	var canvas, stage;
 	var mouseTarget;	// the display object currently under the mouse, or being dragged
@@ -24,7 +26,7 @@
 		stage.mouseMoveOutside = true; // keep tracking the mouse even when it leaves the canvas
 		// load the source image:
 		var image = new Image();
-		image.src = "https://www.asme.org/getmedia/c2c8ea5a-b690-4ba7-92bb-34bd1432862b/book_guide_hero_books.aspx";
+		image.src = "../_assets/art/daisy.png";
 		image.onload = handleImageLoad;
 	}
 	function stop() {
@@ -89,7 +91,7 @@
 
 	<p>Example of implementing drag &amp; drop using mouse events such as <code>mousedown</code>,
 		<code>mouseup</code>, and <code>pressmove</code>. Some browsers do not
-		and may throw a
+		allow access to pixel data when running local files, and may throw a
 		security error or not work unless the content is running on a server.
 	</p>
 </header>
