@@ -6,10 +6,12 @@
     <script>
       function init() {
         // code here.'
-        var canvas = document.getElementById("demoCanvas")
+        var canvas = document.getElementById("demoCanvas");
+        this.canvas = canvas;
         var stage = new createjs.Stage(canvas);
         var circle = new createjs.Shape();
         this.stage = stage;
+        this.container = cont
       	// enable touch interactions if supported on the current device:
       	createjs.Touch.enable(stage);
 
@@ -43,8 +45,8 @@
       	for (var i = 0; i < 100; i++) {
       		bitmap = new createjs.Bitmap(image);
       		container.addChild(bitmap);
-      		bitmap.x = canvas.width * Math.random() | 0;
-      		bitmap.y = canvas.height * Math.random() | 0;
+      		bitmap.x = this.canvas.width * Math.random() | 0;
+      		bitmap.y = this.canvas.height * Math.random() | 0;
       		bitmap.rotation = 360 * Math.random() | 0;
       		bitmap.regX = bitmap.image.width / 2 | 0;
       		bitmap.regY = bitmap.image.height / 2 | 0;
