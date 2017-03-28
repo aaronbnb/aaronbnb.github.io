@@ -85,6 +85,7 @@
 				update = true;
 			});
 		}
+		canvas.addEventListener("type", type);
 		createjs.Ticker.addEventListener("tick", tick);
 	}
 
@@ -100,11 +101,8 @@
 		}
 	}
 
-	function playerGuess() {
-		$('*').on('keydown').keydown(function( event ) {
-			event.preventDefault();
-			alert("hello");
-		}
+	function type(event) {
+		console.log(event.value);
 	}
 
 </script>
