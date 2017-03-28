@@ -36,6 +36,7 @@
 		const hints = ["Said in 1776", "He owned slaves", "From Virginia"]
 		for (var i = 0; i < 3; i++) {
 			text = new createjs.Text();
+			text.font = "20px Arial";
 			text.x = canvas.width * Math.random() | 0;
 			text.y = canvas.height * Math.random() | 0;
 			text.text = hints[i];
