@@ -37,25 +37,9 @@
 		circle.y = 100;
 		stage.addChild(circle);
 
-		const width = 200;
-		const height = 200;
-		let hintContainer = new createjs.Container();
-		hintContainer(50, 50, width, height);
-
-		var rect = new c.Shape();
-		rect.graphics.beginFill('#6e7e8e');
-
-		var text = new createjs.Text();
-		text.set({
-    text: 'hello',
-		});
-		
-		var b = text.getBounds();
-		text.x = width - b.width/2;
-		text.y = height - b.height/2;
-
-		hintContainer.addChild(text);
-		stage.addChild(hintContainer);
+		var roundRect = new createjs.Shape();
+		roundRect.graphics.beginFill("Red").drawRoundRect(250, 250, 100, 100);
+		stage.addChild(roundRect);
 
 		stage.addChild(container);
 
