@@ -27,14 +27,15 @@
 		// load the source image:
 		var image = new Image();
 		image.src = "./book.png";
+    
 		var container = new createjs.Container();
 		stage.addChild(container);
 		// create a shape that represents the center of the daisy image:
 		var hitArea = new createjs.Shape();
 		hitArea.graphics.beginFill("#FFF").drawEllipse(-11, -14, 24, 18);
 		// position hitArea relative to the internal coordinate system of the target bitmap instances:
-		hitArea.x = image.width / 2;
-		hitArea.y = image.height / 2;
+		hitArea.x = image.width;
+		hitArea.y = image.height;
 		// create and populate the screen with random daisies:
 		for (var i = 0; i < 100; i++) {
 			bitmap = new createjs.Bitmap(image);
