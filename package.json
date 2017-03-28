@@ -1,0 +1,21 @@
+{
+  "name": "aaronbnb.github.io",
+  "version": "1.0.0",
+  "description": "### Background",
+  "main": "webpack.config.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+     "webpack": "webpack"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/aaronbnb/aaronbnb.github.io.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/aaronbnb/aaronbnb.github.io/issues"
+  },
+  "homepage": "https://github.com/aaronbnb/aaronbnb.github.io#readme"
+}
