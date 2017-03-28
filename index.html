@@ -27,14 +27,6 @@
 		// load the source image:
 		var image = new Image();
 		image.src = "./book.png";
-		image.onload = handleImageLoad;
-	}
-	function stop() {
-		createjs.Ticker.removeEventListener("tick", tick);
-	}
-	function handleImageLoad(event) {
-		var image = event.target;
-		var bitmap;
 		var container = new createjs.Container();
 		stage.addChild(container);
 		// create a shape that represents the center of the daisy image:
@@ -84,6 +76,11 @@
 		}
 		createjs.Ticker.addEventListener("tick", tick);
 	}
+
+  function stop() {
+		createjs.Ticker.removeEventListener("tick", tick);
+	}
+
 	function tick(event) {
 		// this set makes it so the stage only re-renders when an event handler indicates a change has happened.
 		if (update) {
