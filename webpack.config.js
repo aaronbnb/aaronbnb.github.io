@@ -1,7 +1,7 @@
-module.exports = {
-  entry: "./lib/asteroids.js",
-  output: {
-  	filename: "./lib/bundle.js"
-  },
-  devtool: 'source-map',
-};
+// module.exports = {
+//   entry: "./lib/trivia.js",
+//   output: {
+//   	filename: "./lib/bundle.js"
+//   },
+//   devtool: 'source-map',
+// };
