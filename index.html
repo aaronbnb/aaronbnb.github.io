@@ -4,7 +4,7 @@
 	<meta charset="utf-8">
 	<title>EaselJS Example: Rollovers and Drag & Drop</title>
   <script src="https://code.createjs.com/easeljs-0.8.2.min.js"></script>
-
+	<script src="jquery-3.2.0.min.js"></script>
 	<!-- We also provide hosted minified versions of all CreateJS libraries.
 	  http://code.createjs.com -->
 
@@ -27,7 +27,7 @@
 		// load the source image:
 		var image = new Image();
 		image.src = "./book.png";
-
+		playerGuess();
 		const container = new createjs.Container();
 
 		var roundRect = new createjs.Shape();
@@ -99,6 +99,14 @@
 			stage.update(event);
 		}
 	}
+
+	function playerGuess() {
+		$('*').on('keydown').keydown(function( event ) {
+			event.preventDefault();
+			alert("hello");
+		}
+	}
+
 </script>
 
 </head>
@@ -113,6 +121,7 @@
 
 <div>
 	<canvas id="testCanvas" width="960" height="400"></canvas>
+	<ul className='input-field'></ul>
 </div>
 </body>
 </html>
