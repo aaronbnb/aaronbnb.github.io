@@ -37,14 +37,26 @@
 		circle.y = 100;
 		stage.addChild(circle);
 
+		const width = 200;
+		const height = 200;
+		let hintContainer = new createjs.Container();
+		hintContainer(50, 50, width, height);
 
-		// 
-		// var text = new createjs.Text("Said in 1976", "20px Arial", "#ff7700");
-		// text.x = 100;
-		// text.y = 100;
-		// text.textBaseline = "alphabetic";
-		// stage.addChild(hintContainer);
-		// hintContainer.addChild(text);
+		var rect = new c.Shape();
+		rect.graphics.beginFill('#6e7e8e');
+
+		var text = new createjs.Text();
+		text.set({
+    text: 'hello',
+		});
+		
+		var b = text.getBounds();
+		text.x = width - b.width/2;
+		text.y = height - b.height/2;
+
+		hintContainer.addChild(text);
+		stage.addChild(hintContainer);
+
 		stage.addChild(container);
 
 		for (var i = 0; i < 10; i++) {
