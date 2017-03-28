@@ -4,7 +4,12 @@
     <meta charset="utf-8">
     <script src="https://code.createjs.com/easeljs-0.8.2.min.js"></script>
     <script>
-      function init() {
+    class Board {
+      constructor() {
+        this.init();
+      }
+
+      init() {
         // code here.'
         var canvas = document.getElementById("demoCanvas");
         this.canvas = canvas;
@@ -35,8 +40,8 @@
       }
 
 
-      function handleImageLoad(event) {
-      	var image = this.image;
+      handleImageLoad(event) {
+      	var image = event.target;
       	var bitmap;
       	var container = new createjs.Container();
       	this.stage.addChild(container);
@@ -84,7 +89,7 @@
       	examples.hideDistractor();
       	createjs.Ticker.addEventListener("tick", tick);
       }
-
+}
     </script>
     <title></title>
   </head>
