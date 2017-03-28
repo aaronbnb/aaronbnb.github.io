@@ -4,9 +4,13 @@
 	<meta charset="utf-8">
 	<title>EaselJS Example: Rollovers and Drag & Drop</title>
 
+	<link href="../_assets/css/shared.css" rel="stylesheet" type="text/css"/>
+	<link href="../_assets/css/examples.css" rel="stylesheet" type="text/css"/>
 	<script src="../_assets/js/examples.js"></script>
 
 	<script src="../lib/easeljs-NEXT.combined.js"></script>
+	<!-- We also provide hosted minified versions of all CreateJS libraries.
+	  http://code.createjs.com -->
 
 <script id="editable">
 	var canvas, stage;
@@ -15,9 +19,29 @@
 	var offset;
 	var update = true;
 	function init() {
+    if (document.body) { setupEmbed(); }
+        else { document.addEventListener("DOMContentLoaded", setupEmbed); }
+
+        function setupEmbed() {
+          if (window.top != window) {
+            document.body.className += " embedded";
+          }
+        }
+var o = window.examples = {};
+o.showDistractor = function(id) {
+  var div = id ? document.getElementById(id) : document.querySelector("div canvas").parentNode;
+  div.className += " loading";
+};
+
+o.hideDistractor = function() {
+  var div = document.querySelector(".loading");
+  div.className = div.className.replace(/\bloading\b/);
+};
+
 		examples.showDistractor();
 		// create stage and point it to the canvas:
 		canvas = document.getElementById("testCanvas");
+		//check to see if we are running in a browser with touch support
 		stage = new createjs.Stage(canvas);
 		// enable touch interactions if supported on the current device:
 		createjs.Touch.enable(stage);
@@ -37,6 +61,12 @@
 		var bitmap;
 		var container = new createjs.Container();
 		stage.addChild(container);
+		// create a shape that represents the center of the daisy image:
+		var hitArea = new createjs.Shape();
+		hitArea.graphics.beginFill("#FFF").drawEllipse(-11, -14, 24, 18);
+		// position hitArea relative to the internal coordinate system of the target bitmap instances:
+		hitArea.x = image.width / 2;
+		hitArea.y = image.height / 2;
 		// create and populate the screen with random daisies:
 		for (var i = 0; i < 100; i++) {
 			bitmap = new createjs.Bitmap(image);
@@ -49,25 +79,30 @@
 			bitmap.scaleX = bitmap.scaleY = bitmap.scale = Math.random() * 0.4 + 0.6;
 			bitmap.name = "bmp_" + i;
 			bitmap.cursor = "pointer";
-			// using "on" binds the listener to the scope of the currentTarget by default
-			// in this case that means it executes in the scope of the button.
-			bitmap.on("mousedown", function (evt) {
-				this.parent.addChild(this);
-				this.offset = {x: this.x - evt.stageX, y: this.y - evt.stageY};
+			// assign the hit area:
+			bitmap.hitArea = hitArea;
+			bitmap.addEventListener("mousedown", function (evt) {
+				// bump the target in front of its siblings:
+				var o = evt.target;
+				o.parent.addChild(o);
+				o.offset = {x: o.x - evt.stageX, y: o.y - evt.stageY};
 			});
 			// the pressmove event is dispatched when the mouse moves after a mousedown on the target until the mouse is released.
-			bitmap.on("pressmove", function (evt) {
-				this.x = evt.stageX + this.offset.x;
-				this.y = evt.stageY + this.offset.y;
+			bitmap.addEventListener("pressmove", function (evt) {
+				var o = evt.target;
+				o.x = evt.stageX + o.offset.x;
+				o.y = evt.stageY + o.offset.y;
 				// indicate that the stage should be updated on the next tick:
 				update = true;
 			});
-			bitmap.on("rollover", function (evt) {
-				this.scaleX = this.scaleY = this.scale * 1.2;
+			bitmap.addEventListener("rollover", function (evt) {
+				var o = evt.target;
+				o.scaleX = o.scaleY = o.scale * 1.2;
 				update = true;
 			});
-			bitmap.on("rollout", function (evt) {
-				this.scaleX = this.scaleY = this.scale;
+			bitmap.addEventListener("rollout", function (evt) {
+				var o = evt.target;
+				o.scaleX = o.scaleY = o.scale;
 				update = true;
 			});
 		}
@@ -87,13 +122,11 @@
 
 <body onload="init();">
 <header class="EaselJS">
-	<h1>Drag &amp; Drop</h1>
+	<h1>Drag &amp; Drop With Hit Areas</h1>
 
-	<p>Example of implementing drag &amp; drop using mouse events such as <code>mousedown</code>,
-		<code>mouseup</code>, and <code>pressmove</code>. Some browsers do not
-		allow access to pixel data when running local files, and may throw a
-		security error or not work unless the content is running on a server.
-	</p>
+	<p>This example is the same as the DragAndDrop example, except it uses
+		<code>hitArea</code> to make only the center part of the daisy respond
+		to mouse interactions.</p>
 </header>
 
 <div>
