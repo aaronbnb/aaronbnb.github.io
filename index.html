@@ -31,9 +31,7 @@
 		const container = new createjs.Container();
 
 		var roundRect = new createjs.Shape();
-		roundRect.graphics.beginFill("DeepSkyBlue").drawRoundRect(0, 0, 50);
-		roundRect.x = 100;
-		roundRect.y = 100;
+		roundRect.graphics.beginStroke("black").drawRoundRect(100,100,100,100,0,0,5,5);
 		stage.addChild(roundRect);
 
 		stage.addChild(container);
