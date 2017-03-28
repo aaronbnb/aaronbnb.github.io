@@ -9,7 +9,7 @@
         var canvas = document.getElementById("demoCanvas")
         var stage = new createjs.Stage(canvas);
         var circle = new createjs.Shape();
-
+        this.stage = stage;
       	// enable touch interactions if supported on the current device:
       	createjs.Touch.enable(stage);
 
@@ -37,7 +37,7 @@
       	var image = event.target;
       	var bitmap;
       	var container = new createjs.Container();
-      	stage.addChild(container);
+      	this.stage.addChild(container);
 
       	// create and populate the screen with random daisies:
       	for (var i = 0; i < 100; i++) {
