@@ -6,6 +6,12 @@
     <script>
     class Board {
       constructor() {
+        var canvas = document.getElementById("demoCanvas");
+        this.canvas = canvas;
+        var stage = new createjs.Stage(canvas);
+        var circle = new createjs.Shape();
+        this.stage = stage;
+        this.circle = circle;
         this.init();
       }
 
@@ -28,7 +34,6 @@
         var image = new Image();
         image.src = "./book.png";
         this.image = image;
-        image.onload = this.handleImageLoad;
 
         // var g = new createjs.Graphics();
         // // myGraphics.beginStroke("red").beginFill("blue").drawRect(20, 20, 100, 50);
@@ -37,11 +42,6 @@
         circle.y = 100;
         stage.addChild(circle);
         stage.update();
-      }
-
-
-      handleImageLoad(event) {
-      	var image = event.target;
       	var bitmap;
       	var container = new createjs.Container();
       	(this.stage).addChild(container);
