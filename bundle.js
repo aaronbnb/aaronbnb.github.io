@@ -172,6 +172,9 @@ class Game {
     this.canvas = document.getElementById('answerField');
     // create stage and point it to the canvas:
     this.stage = new createjs.Stage('answerField');
+    this.answer = document.getElementById("answer");
+    debugger;
+    this.answer
   }
 
   play() {
@@ -179,11 +182,11 @@ class Game {
     roundRect.graphics.beginFill("black").drawRoundRect(200,100,200,200,10,10,10,10);
     this.stage.setChildIndex( roundRect, this.stage.getNumChildren()-1);
     this.stage.update();
+    this.evaluateGuess();
   }
 
   evaluateGuess() {
-    const answer = document.getElementById("answer").value;
-    debugger;
+
     if (answer === 'Thomas Jefferson' || answer === 'Jefferson') {
       this.displayWin();
     }
