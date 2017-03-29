@@ -163,6 +163,10 @@ class Board {
     roundRect.graphics.beginFill("black").drawRoundRect(200,100,200,200,10,10,10,10);
     this.stage.addChild(roundRect);
     this.stage.update();
+    if (this.update) {
+      this.update = false; // only update once
+      this.stage.update(event);
+    }
   }
 }
 module.exports = Board;
@@ -193,8 +197,8 @@ class Game {
 
   evaluateGuess() {
     if (this.answer.value === 'Thomas Jefferson' || this.answer.value === 'Jefferson') {
-      setTimeout( () => console.log("waiting"), 3000);
-      setTimeout(this.board.displayWin(), 3000);
+      this.board.displayWin();
+      Ticker.TIMEOUT(3000);
     }
   }
 
