@@ -106,7 +106,7 @@ class Board {
       this.stage.update();
     this.stage.addChild(container);
 
-  	for (var i = 0; i < 30; i++) {
+  	for (var i = 0; i < 50; i++) {
   		let bitmap = new createjs.Bitmap(this.image);
   		container.addChild(bitmap);
   		bitmap.x = this.canvas.width * Math.random() | 0;
