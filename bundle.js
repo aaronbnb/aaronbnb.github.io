@@ -165,7 +165,6 @@ class Board {
     this.stage.update();
     if (this.update) {
       this.update = false; // only update once
-      this.stage.update(event);
     }
   }
 }
@@ -198,7 +197,7 @@ class Game {
   evaluateGuess() {
     if (this.answer.value === 'Thomas Jefferson' || this.answer.value === 'Jefferson') {
       this.board.displayWin();
-      Ticker.TIMEOUT(3000);
+      Ticker.TIMEOUT(5000);
     }
   }
 
