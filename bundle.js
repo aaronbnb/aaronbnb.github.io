@@ -167,11 +167,10 @@ module.exports = Board;
 
 
 class Game {
-  constructor() {
+  constructor(stage) {
     //check to see if we are running in a browser with touch support
-    this.canvas = document.getElementById('testCanvas');
     // create stage and point it to the canvas:
-    this.stage = new createjs.Stage('testCanvas');
+    this.stage = stage;
     this.answer = document.getElementById("answer");
     this.answer.onchange = this.evaluateGuess.bind(this);
   }
