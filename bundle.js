@@ -91,9 +91,6 @@ class Board {
 
   setUpRound() {
 		const container = new createjs.Container();
-		var roundRect = new createjs.Shape();
-		roundRect.graphics.beginStroke("black").drawRoundRect(150,150,100,100,0,0,5,5);
-		this.stage.addChild(roundRect);
 		const hints = ["Said in 1776", "He owned slaves", "From Virginia"]
 		  for (var i = 0; i < 3; i++) {
 			  let text = new createjs.Text();
@@ -106,7 +103,7 @@ class Board {
       this.stage.update();
     this.stage.addChild(container);
 
-  	for (var i = 0; i < 50; i++) {
+  	for (var i = 0; i < 30; i++) {
   		let bitmap = new createjs.Bitmap(this.image);
   		container.addChild(bitmap);
   		bitmap.x = .9 * (this.canvas.width) * Math.random() | 0;
@@ -168,15 +165,17 @@ module.exports = Board;
 /***/ (function(module, exports) {
 
 class Game {
-  constructor() {
+  constructor(canvas) {
     this.canvas = document.getElementById("testCanvas");
     //check to see if we are running in a browser with touch support
     this.stage = new createjs.Stage(this.canvas);
-    var circle = new createjs.Shape();
-    circle.graphics.beginFill("DeepSkyBlue").drawCircle(0, 0, 50);
-    circle.x = 100;
-    circle.y = 100;
-    this.stage.addChild(circle);
+
+  }
+
+  play() {
+    var roundRect = new createjs.Shape();
+    roundRect.graphics.beginFill("black").drawRoundRect(200,100,200,200,10,10,10,10);
+    this.stage.addChild(roundRect);
   }
 //     this.mouseTarget;	// the display object currently under the mouse, or being dragged
 //     this.dragStarted;	// indicates whether we are currently in a drag operation
@@ -280,7 +279,9 @@ const Game = __webpack_require__(1);
 
 document.addEventListener('DOMContentLoaded', () => {
   let board = new Board();
+  let game = new Game();
   board.setUpRound();
+  game.play();
   window.canvas = document.getElementById('testCanvas');
   window.stage = board.stage;
   // init();
