@@ -167,6 +167,7 @@ class Board {
       this.update = false; // only update once
       this.stage.update(event);
     }
+    debugger;
   }
 }
 module.exports = Board;
