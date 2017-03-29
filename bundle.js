@@ -186,7 +186,7 @@ class Game {
 
   evaluateGuess() {
     debugger;
-    if (answer === 'Thomas Jefferson' || answer === 'Jefferson') {
+    if (this.answer === 'Thomas Jefferson' || this.answer === 'Jefferson') {
       this.displayWin();
     }
     debugger;
