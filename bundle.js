@@ -193,7 +193,8 @@ class Game {
 
   evaluateGuess() {
     if (this.answer.value === 'Thomas Jefferson' || this.answer.value === 'Jefferson') {
-      this.board.displayWin();
+      setTimeout( () => console.log("waiting"), 3000);
+      setTimeout(this.board.displayWin(), 3000);
     }
   }
 
