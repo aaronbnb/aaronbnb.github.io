@@ -166,7 +166,7 @@ module.exports = Board;
 
 class Game {
   constructor(canvas) {
-    this.canvas = document.getElementById("testCanvas");
+    this.canvas = canvas;
     //check to see if we are running in a browser with touch support
     this.stage = new createjs.Stage(this.canvas);
 
@@ -177,7 +177,20 @@ class Game {
     roundRect.graphics.beginFill("black").drawRoundRect(200,100,200,200,10,10,10,10);
     this.stage.addChild(roundRect);
     this.stage.update();
-    debugger;
+  }
+
+  evaluateGuess() {
+    const answer = document.getElementById("answer").value;
+    if (answer === 'Thomas Jefferson' || answer === 'Jefferson') {
+      this.displayWin();
+    }
+  }
+
+  displayWin() {
+    var roundRect = new createjs.Shape();
+    roundRect.graphics.beginFill("black").drawRoundRect(200,100,200,200,10,10,10,10);
+    this.stage.setChildIndex( roundRect, this.stage.getNumChildren()-1);
+    this.stage.update();
   }
 //     this.mouseTarget;	// the display object currently under the mouse, or being dragged
 //     this.dragStarted;	// indicates whether we are currently in a drag operation
