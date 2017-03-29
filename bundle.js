@@ -87,7 +87,7 @@ class Board {
 		this.stage.mouseMoveOutside = true; // keep tracking the mouse even when it leaves the canvas
 	// load the source image:
 		this.image = new Image();
-		this.image.src = "./../book.png";
+		this.image.src = "./book.png";
   }
 
   setUpRound() {
@@ -183,7 +183,7 @@ class Game {
     this.board = board;
     this.stage = this.board.stage;
     this.answer = document.getElementById("answer");
-    this.answer.onchange = this.evaluateGuess.bind(this);
+    this.answer.oninput=this.evaluateGuess.bind(this);
   }
 
   play() {
@@ -194,10 +194,10 @@ class Game {
     this.stage.update();
   }
 
-  evaluateGuess() {
+  evaluateGuess(e) {
+    e.preventDefault();
     if (this.answer.value === 'Thomas Jefferson' || this.answer.value === 'Jefferson') {
       this.board.displayWin();
-      Ticker.TIMEOUT(5000);
     }
   }
 
