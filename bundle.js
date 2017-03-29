@@ -104,10 +104,6 @@ class Board {
   			this.stage.addChild(text);
 		  }
       this.stage.update();
-    }
-
-  populateBoard() {
-    const container = new createjs.Container();
     this.stage.addChild(container);
 
   	for (var i = 0; i < 10; i++) {
