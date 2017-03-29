@@ -149,7 +149,7 @@ class Board {
   }
 
   stop() {
-	   createjs.Ticker.removeEventListener("tick", tick);
+	   createjs.Ticker.removeEventListener("tick", this.tick);
   }
 //
   tick(event) {
