@@ -173,8 +173,7 @@ class Game {
     // create stage and point it to the canvas:
     this.stage = new createjs.Stage('answerField');
     this.answer = document.getElementById("answer");
-    debugger;
-    this.answer
+    this.answer.onchange = this.evaluateGuess.bind(this);
   }
 
   play() {
@@ -186,10 +185,11 @@ class Game {
   }
 
   evaluateGuess() {
-
+    debugger;
     if (answer === 'Thomas Jefferson' || answer === 'Jefferson') {
       this.displayWin();
     }
+    debugger;
   }
 
   displayWin() {
