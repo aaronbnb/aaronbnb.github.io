@@ -148,6 +148,7 @@ class Board {
   			this.update = true;
   		});
   	}
+    this.stage.update();
   	createjs.Ticker.addEventListener("tick", this.tick);
   }
 
@@ -284,6 +285,7 @@ const Game = __webpack_require__(1);
 document.addEventListener('DOMContentLoaded', () => {
   let board = new Board();
   board.setUpRound();
+  board.populateBoard();
   window.canvas = document.getElementById('testCanvas');
   window.stage = board.stage;
   // init();
