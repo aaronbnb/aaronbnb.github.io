@@ -160,6 +160,7 @@ class Board {
 
   displayWin() {
     var roundRect = new createjs.Shape();
+    debugger;
     roundRect.graphics.beginFill("black").drawRoundRect(200,100,200,200,10,10,10,10);
     this.stage.addChild(roundRect);
     this.stage.update();
