@@ -166,10 +166,9 @@ module.exports = Board;
 /***/ (function(module, exports) {
 
 class Game {
-  constructor(canvas) {
-    this.canvas = canvas;
+  constructor(stage) {
     //check to see if we are running in a browser with touch support
-    this.stage = new createjs.Stage(this.canvas);
+    this.stage = stage;
 
   }
 
