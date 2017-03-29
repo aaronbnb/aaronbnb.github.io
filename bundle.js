@@ -90,27 +90,22 @@ class Board {
   }
 
   setUpRound() {
-		// const container = new createjs.Container();
-		// var roundRect = new createjs.Shape();
-		// roundRect.graphics.beginStroke("black").drawRoundRect(150,150,100,100,0,0,5,5);
-		// this.stage.addChild(roundRect);
-		// const hints = ["Said in 1776", "He owned slaves", "From Virginia"]
-		// for (var i = 0; i < 3; i++) {
-		// 	let text = new createjs.Text();
-		// 	text.font = "20px Arial";
-		// 	text.x = this.canvas.width * Math.random() | 0;
-		// 	text.y = this.canvas.height * Math.random() | 0;
-		// 	text.text = hints[i];
-		// 	this.stage.addChild(text);
-		//   }
-    var circle = new createjs.Shape();
-    circle.graphics.beginFill("DeepSkyBlue").drawCircle(0, 0, 50);
-    circle.x = 100;
-    circle.y = 100;
-    this.stage.addChild(circle);
-    this.stage.update();
-    }
+		const container = new createjs.Container();
+		var roundRect = new createjs.Shape();
+		roundRect.graphics.beginStroke("black").drawRoundRect(150,150,100,100,0,0,5,5);
+		this.stage.addChild(roundRect);
+		const hints = ["Said in 1776", "He owned slaves", "From Virginia"]
+		  for (var i = 0; i < 3; i++) {
+			  let text = new createjs.Text();
+  			text.font = "20px Arial";
+  			text.x = this.canvas.width * Math.random() | 0;
+  			text.y = this.canvas.height * Math.random() | 0;
+  			text.text = hints[i];
+  			this.stage.addChild(text);
+		  }
+      this.stage.update();
   }
+}
 //
 //
 // 	this.stage.addChild(container);
