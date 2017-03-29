@@ -180,6 +180,7 @@ class Game {
     var roundRect = new createjs.Shape();
     roundRect.graphics.beginFill("black").drawRoundRect(200,100,200,200,10,10,10,10);
     this.stage.setChildIndex( roundRect, this.stage.getNumChildren()-1);
+    this.stage.addChild(roundRect);
     this.stage.update();
     this.evaluateGuess();
   }
