@@ -178,7 +178,8 @@ class Game {
   constructor(board) {
     //check to see if we are running in a browser with touch support
     // create stage and point it to the canvas:
-    this.stage = board.stage;
+    this.board = board;
+    this.stage = this.board.stage;
     debugger;
     this.answer = document.getElementById("answer");
     this.answer.onchange = this.evaluateGuess.bind(this);
@@ -194,7 +195,7 @@ class Game {
 
   evaluateGuess() {
     if (this.answer.value === 'Thomas Jefferson' || this.answer.value === 'Jefferson') {
-      board.displayWin();
+      this.board.displayWin();
     }
   }
 
