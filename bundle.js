@@ -124,7 +124,7 @@ class Board {
   			var o = evt.target;
   			o.parent.addChild(o);
   			o.offset = {x: o.x - evt.stageX, y: o.y - evt.stageY};
-  		});
+  		}.bind(this));
   		// the pressmove event is dispatched when the mouse moves after a mousedown on the target until the mouse is released.
   		bitmap.addEventListener("pressmove", function (evt) {
   			var o = evt.target;
@@ -132,17 +132,17 @@ class Board {
   			o.y = evt.stageY + o.offset.y;
   			// indicate that the stage should be updated on the next tick:
   			this.update = true;
-  		});
+  		}.bind(this));
   		bitmap.addEventListener("rollover", function (evt) {
   			var o = evt.target;
   			o.scaleX = o.scaleY = o.scale * 1.2;
   			this.update = true;
-  		});
+  		}.bind(this));
   		bitmap.addEventListener("rollout", function (evt) {
   			var o = evt.target;
   			o.scaleX = o.scaleY = o.scale;
   			this.update = true;
-  		});
+  		}.bind(this));
   	}
     this.stage.update();
   	createjs.Ticker.addEventListener("tick", this.tick.bind(this));
