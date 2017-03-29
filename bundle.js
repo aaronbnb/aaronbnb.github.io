@@ -145,11 +145,11 @@ class Board {
   		});
   	}
     this.stage.update();
-  	createjs.Ticker.addEventListener("tick", this.tick);
+  	createjs.Ticker.addEventListener("tick", this.tick.bind(this));
   }
 
   stop() {
-	   createjs.Ticker.removeEventListener("tick", this.tick);
+	   createjs.Ticker.removeEventListener("tick", this.tick.bind(this));
   }
 //
   tick(event) {
@@ -281,7 +281,6 @@ const Game = __webpack_require__(1);
 document.addEventListener('DOMContentLoaded', () => {
   let board = new Board();
   board.setUpRound();
-  board.populateBoard();
   window.canvas = document.getElementById('testCanvas');
   window.stage = board.stage;
   // init();
