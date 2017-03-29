@@ -285,7 +285,6 @@ document.addEventListener('DOMContentLoaded', () => {
   let board = new Board();
   board.setUpRound();
   window.canvas = document.getElementById('testCanvas');
-  window.makeCircle = board.makeCircle.bind(board);
   window.stage = board.stage;
   // init();
 });
