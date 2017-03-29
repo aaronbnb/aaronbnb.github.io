@@ -85,6 +85,7 @@ class Board {
 		this.stage.enableMouseOver(10);
 		this.stage.mouseMoveOutside = true; // keep tracking the mouse even when it leaves the canvas
 	// load the source image:
+  debugger;
 		this.image = new Image();
 		this.image.src = "./../book.png";
   }
@@ -276,12 +277,10 @@ module.exports = Game;
 /* 2 */
 /***/ (function(module, exports, __webpack_require__) {
 
-const spaget = () => console.log('spaghet');
 const Board = __webpack_require__(0);
 const Game = __webpack_require__(1);
 
 document.addEventListener('DOMContentLoaded', () => {
-  window.spaget = spaget;
   let board = new Board();
   board.setUpRound();
   window.canvas = document.getElementById('testCanvas');
