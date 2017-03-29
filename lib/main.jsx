@@ -5,7 +5,7 @@ document.addEventListener('DOMContentLoaded', () => {
   let board = new Board();
   let game = new Game(board.stage);
   board.setUpRound();
-  game.play();
+  // game.play();
   window.canvas = document.getElementById('testCanvas');
   window.stage = board.stage;
   // init();
