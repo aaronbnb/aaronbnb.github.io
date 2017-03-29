@@ -75,7 +75,7 @@ class Board {
     this.canvas = document.getElementById('testCanvas');
     // create stage and point it to the canvas:
     this.stage = new createjs.Stage('testCanvas');
-    
+
   	this.mouseTarget;	// the display object currently under the mouse, or being dragged
   	this.dragStarted;	// indicates whether we are currently in a drag operation
   	this.offset;
@@ -152,11 +152,18 @@ class Board {
 //
   tick(event) {
 	// this set makes it so the stage only re-renders when an event handler indicates a change has happened.
-	if (this.update) {
-		this.update = false; // only update once
-		this.stage.update(event);
-	}
-}
+	  if (this.update) {
+		  this.update = false; // only update once
+		  this.stage.update(event);
+	  }
+  }
+
+  displayWin() {
+    var roundRect = new createjs.Shape();
+    roundRect.graphics.beginFill("black").drawRoundRect(200,100,200,200,10,10,10,10);
+    this.stage.addChild(roundRect);
+    this.stage.update();
+  }
 }
 module.exports = Board;
 
@@ -167,10 +174,11 @@ module.exports = Board;
 
 
 class Game {
-  constructor(stage) {
+  constructor(board) {
     //check to see if we are running in a browser with touch support
     // create stage and point it to the canvas:
-    this.stage = stage;
+    this.stage = board.stage;
+    debugger;
     this.answer = document.getElementById("answer");
     this.answer.onchange = this.evaluateGuess.bind(this);
   }
@@ -181,22 +189,14 @@ class Game {
     this.stage.setChildIndex( roundRect, this.stage.getNumChildren()-1);
     this.stage.addChild(roundRect);
     this.stage.update();
-    this.evaluateGuess();
   }
 
   evaluateGuess() {
     if (this.answer.value === 'Thomas Jefferson' || this.answer.value === 'Jefferson') {
-      this.displayWin();
+      board.displayWin();
     }
   }
 
-  displayWin() {
-    var roundRect = new createjs.Shape();
-    debugger;
-    roundRect.graphics.beginFill("black").drawRoundRect(200,100,200,200,10,10,10,10);
-    this.stage.setChildIndex( roundRect, this.stage.getNumChildren()-1);
-    this.stage.update();
-  }
 
 }
 module.exports = Game;
@@ -211,7 +211,7 @@ const Game = __webpack_require__(1);
 
 document.addEventListener('DOMContentLoaded', () => {
   let board = new Board();
-  let game = new Game(board.stage);
+  let game = new Game(board);
   board.setUpRound();
   // game.play();
   window.canvas = document.getElementById('testCanvas');
