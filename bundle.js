@@ -320,6 +320,7 @@ class Game {
 
   play() {
     this.canvas.removeEventListener("mousedown", this.gameStart);
+    debugger;
     this.board.setUpRound(this.round);
     this.displayQuote(this.round);
     this.answer.onkeydown = function(e) {
