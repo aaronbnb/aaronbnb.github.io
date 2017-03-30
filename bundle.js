@@ -318,8 +318,8 @@ class Game {
     this.canvas.onmousedown = function(e) {
       this.stage.removeChild(instructionsContainer);
       this.stage.update();
-      this.play();
     }.bind(this);
+    setTimeout(this.play(), 4000);
   }
 
   play() {
@@ -330,7 +330,7 @@ class Game {
         this.stage.removeAllChildren();
         this.stage.update();
         this.round += 1;
-        this.play();
+        this.play;
       }
     }.bind(this);
   }
