@@ -66,8 +66,9 @@
 /******/ 	return __webpack_require__(__webpack_require__.s = 2);
 /******/ })
 /************************************************************************/
-/******/ ([
-/* 0 */
+/******/ ({
+
+/***/ 0:
 /***/ (function(module, exports) {
 
 class Board {
@@ -161,7 +162,7 @@ class Board {
   displayWin() {
     const container = new createjs.Container();
     let winText = new createjs.Text();
-    winText.font = "18px Arial";
+    winText.font = "20px Arial";
     winText.x = 335;
     winText.y = 325;
     winText.color = "#FFFFFF";
@@ -210,7 +211,7 @@ class Board {
     quote.color = "#FFFFFF";
     quote.text = "Give me liberty or give me death";
     var roundRect = new createjs.Shape();
-    roundRect.graphics.beginFill("black").drawRoundRect(100,50,50,200,10,10,10,10);
+    roundRect.graphics.beginFill("black").drawRoundRect(100,50,500,100,10,10,10,10);
     quoteContainer.addChild(roundRect);
     quoteContainer.addChild(quote);
     // container.addChild(enterText);
@@ -222,25 +223,79 @@ module.exports = Board;
 
 
 /***/ }),
-/* 1 */
-/***/ (function(module, exports) {
 
+/***/ 1:
+/***/ (function(module, exports, __webpack_require__) {
+
+const Timer = __webpack_require__(35);
 
 class Game {
-  constructor(board) {
+  constructor(board, timer) {
     //check to see if we are running in a browser with touch support
     // create stage and point it to the canvas:
     this.board = board;
     this.stage = this.board.stage;
     this.answer = document.getElementById("answer");
+    this.canvas = document.getElementById('testCanvas');
+    this.timer = timer;
     // this.board.displayQuote();
     this.score = 0;
     this.answers = ["George Washington", "Thomas Jefferson"];
     this.answer.oninput=this.evaluateGuess.bind(this);
+
   }
 
   displayQuote() {
     this.board.displayQuote();
+  }
+
+  showTitle() {
+    const titleContainer = new createjs.Container();
+    let title = new createjs.Text();
+    title.font = "20px Arial";
+    title.x = 210;
+    title.y = 125;
+    title.color = "#FFFFFF";
+    title.text = "Press any key or click the mouse\n\nBasically do anything to play!";
+    var roundRect = new createjs.Shape();
+    roundRect.graphics.beginFill("#aaaaaa").drawRoundRect(200,100,500,300,10,10,10,10);
+    titleContainer.addChild(roundRect);
+    titleContainer.addChild(title);
+    // container.addChild(enterText);
+    this.stage.addChild(titleContainer);
+    this.stage.update();
+
+    this.canvas.onmousedown = function(e) {
+      this.stage.removeChild(titleContainer);
+      this.stage.update();
+      this.displayInstructions();
+    }.bind(this);
+  }
+
+  displayInstructions() {
+    const instructionsContainer = new createjs.Container();
+    let instructions = new createjs.Text();
+    instructions.font = "20px Arial";
+    instructions.x = 210;
+    instructions.y = 125;
+    instructions.color = "#FFFFFF";
+    instructions.text = "Here's how it works...\n\n" +
+    "We'll give you a quote. Type in the speaker.\n\n" +
+    "We'll be generous. Last name is good enough.\n\n" +
+    "If you don't know, move the books to reveal hints";
+    var roundRect = new createjs.Shape();
+    roundRect.graphics.beginFill("black").drawRoundRect(200,100,500,300,10,10,10,10);
+    instructionsContainer.addChild(roundRect);
+    instructionsContainer.addChild(instructions);
+    // container.addChild(enterText);
+    this.stage.addChild(instructionsContainer);
+    this.stage.update();
+
+    this.canvas.onmousedown = function(e) {
+      this.stage.removeChild(instructionsContainer);
+      this.stage.update();
+      this.displayQuote();
+    }.bind(this);
   }
 
   play() {
@@ -269,16 +324,21 @@ module.exports = Game;
 
 
 /***/ }),
-/* 2 */
+
+/***/ 2:
 /***/ (function(module, exports, __webpack_require__) {
 
 const Board = __webpack_require__(0);
 const Game = __webpack_require__(1);
+const Timer = __webpack_require__(35);
 
 document.addEventListener('DOMContentLoaded', () => {
+  window.scroll(0, 300);
   let board = new Board();
-  let game = new Game(board);
-  board.setUpRound();
+  let timer = new Timer(50);
+  let game = new Game(board, timer);
+
+  game.showTitle();
   // game.play();
   window.canvas = document.getElementById('testCanvas');
   window.stage = board.stage;
@@ -286,6 +346,53 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 
+/***/ }),
+
+/***/ 35:
+/***/ (function(module, exports) {
+
+class Timer {
+  constructor(total) {
+    console.log("new timer");
+    this.seconds = 60;
+    this.roundInterval;
+
+    this.decrementSeconds = this.decrementSeconds.bind(this);
+    this.reset = this.reset.bind(this);
+  }
+
+  start (allWordsGuessed, endRound) {
+    this.roundInterval = setInterval( ()=> {
+      if (this.seconds && allWordsGuessed) {
+        this.decrementSeconds();
+        $('#timer').text(`0:${this.seconds}`);
+      } else {
+        this.reset();
+        endRound();
+      }
+    }, 1000);
+  }
+
+  decrementSeconds() {
+    this.seconds-- ;
+  }
+
+  pause(){
+    if (this.seconds) {
+      clearInterval(this.roundInterval);
+    }
+  }
+
+  reset(){
+    clearInterval(this.roundInterval);
+    this.seconds = 60;
+  }
+}
+
+module.exports = Timer;
+
+
 /***/ })
-/******/ ]);
+
+/******/ });
 //# sourceMappingURL=bundle.js.map

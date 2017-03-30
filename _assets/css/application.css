@@ -1,3 +1,20 @@
 body {
-  background-color: black;
+  background: url("http://res.cloudinary.com/dn4jhnh54/image/upload/v1490853303/34981541_l_xiglyb.jpg");
+  margin: 0px;
+}
+
+.test {
+  margin-top: 5%;
+  text-align:center;
+}
+
+canvas {
+  border: 2px solid #aaaaaa;
+  margin:auto;
+
+}
+
+#answer {
+  border: 1px solid black;
+  line-height: 20px;
 }
