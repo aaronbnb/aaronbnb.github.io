@@ -198,7 +198,7 @@ class Board {
     var roundRect = new createjs.Shape();
     roundRect.graphics.beginFill("black").drawRoundRect(240,300,420,100,10,10,10,10);
     this.reaction.addChild(roundRect);
-    container.addChild(winText);
+    this.reaction.addChild(winText);
     // container.addChild(enterText);
     this.stage.addChild(this.reaction);
     this.stage.update();
