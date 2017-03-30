@@ -159,13 +159,63 @@ class Board {
   }
 
   displayWin() {
+    const container = new createjs.Container();
+    let winText = new createjs.Text();
+    winText.font = "18px Arial";
+    winText.x = 335;
+    winText.y = 325;
+    winText.color = "#FFFFFF";
+    winText.text = "   You're right\n\n   Press enter for next round";
+
     var roundRect = new createjs.Shape();
-    roundRect.graphics.beginFill("black").drawRoundRect(200,100,200,200,10,10,10,10);
-    this.stage.addChild(roundRect);
+    roundRect.graphics.beginFill("black").drawRoundRect(240,300,420,100,10,10,10,10);
+    container.addChild(roundRect);
+    container.addChild(winText);
+    // container.addChild(enterText);
+    this.stage.addChild(container);
     this.stage.update();
     if (this.update) {
       this.update = false; // only update once
     }
+  }
+
+  incorrectGuess() {
+    const container = new createjs.Container();
+    let winText = new createjs.Text();
+    winText.font = "20px Arial";
+    winText.x = 255;
+    winText.y = 325;
+    winText.color = "#FFFFFF";
+    winText.text = "You're incorrect\n\nKeep guessing or press enter for next round";
+
+
+    var roundRect = new createjs.Shape();
+    roundRect.graphics.beginFill("black").drawRoundRect(240,300,420,100,10,10,10,10);
+    container.addChild(roundRect);
+    container.addChild(winText);
+    // container.addChild(enterText);
+    this.stage.addChild(container);
+    this.stage.update();
+    if (this.update) {
+      this.update = false; // only update once
+    }
+  }
+
+  displayQuote() {
+    const quoteContainer = new createjs.Container();
+    let quote = new createjs.Text();
+    quote.font = "20px Arial";
+    quote.x = 110;
+    quote.y = 125;
+    quote.color = "#FFFFFF";
+    quote.text = "Give me liberty or give me death";
+    var roundRect = new createjs.Shape();
+    roundRect.graphics.beginFill("black").drawRoundRect(100,50,50,200,10,10,10,10);
+    quoteContainer.addChild(roundRect);
+    quoteContainer.addChild(quote);
+    // container.addChild(enterText);
+    this.stage.addChild(quoteContainer);
+    this.stage.update();
   }
 }
 module.exports = Board;
@@ -183,21 +233,33 @@ class Game {
     this.board = board;
     this.stage = this.board.stage;
     this.answer = document.getElementById("answer");
+    // this.board.displayQuote();
+    this.score = 0;
+    this.answers = ["George Washington", "Thomas Jefferson"];
     this.answer.oninput=this.evaluateGuess.bind(this);
   }
 
+  displayQuote() {
+    this.board.displayQuote();
+  }
+
   play() {
-    var roundRect = new createjs.Shape();
-    roundRect.graphics.beginFill("black").drawRoundRect(200,100,200,200,10,10,10,10);
-    this.stage.setChildIndex( roundRect, this.stage.getNumChildren()-1);
-    this.stage.addChild(roundRect);
-    this.stage.update();
+    let i = 0;
+    while (i < 5) {
+      this.board.displayHints();
+      this.board.coverHints();
+      this.board.displayQuote();
+      this.evaluateGuess;
+    }
   }
 
   evaluateGuess(e) {
     e.preventDefault();
+    this.displayQuote();
     if (this.answer.value === 'Thomas Jefferson' || this.answer.value === 'Jefferson') {
       this.board.displayWin();
+    } else {
+      this.board.incorrectGuess();
     }
   }
 
