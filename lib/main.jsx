@@ -8,7 +8,8 @@ document.addEventListener('DOMContentLoaded', () => {
   let timer = new Timer(50);
   let game = new Game(board, timer);
 
-  game.showTitle();
+  // game.showTitle();
+  board.setUpRound(0);
   // game.play();
   window.canvas = document.getElementById('testCanvas');
   window.stage = board.stage;
