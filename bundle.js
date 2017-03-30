@@ -112,7 +112,7 @@ class Board {
   	for (var i = 0; i < 30; i++) {
   		let bitmap = new createjs.Bitmap(this.image);
   		container.addChild(bitmap);
-  		bitmap.x = .9 * (this.canvas.width) * Math.random() | 0;
+  		bitmap.x = .9 * this.canvas.width * Math.random() | 0;
   		bitmap.y = .9 * this.canvas.height * Math.random() | 0;
   		bitmap.rotation = 360 * Math.random() | 0;
   		bitmap.regX = bitmap.image.width / 2 | 0;
@@ -307,20 +307,22 @@ class Game {
     // container.addChild(enterText);
     this.stage.addChild(instructionsContainer);
     this.stage.update();
-    this.gameStart = () => {
+    // this.gameStart = () => {
+    //   this.stage.removeChild(instructionsContainer);
+    //   this.stage.update();
+    //   this.play();
+    // };
+
+    this.canvas.onmousedown = function(e) {
       this.stage.removeChild(instructionsContainer);
       this.stage.update();
       this.play();
-    };
-
-
-    this.canvas.addEventListener("mousedown", this.gameStart);
+    }.bind(this);
 
   }
 
   play() {
-    this.canvas.removeEventListener("mousedown", this.gameStart);
-    debugger;
+    this.canvas.onmousedown = null;
     this.board.setUpRound(this.round);
     this.displayQuote(this.round);
     this.answer.onkeydown = function(e) {
