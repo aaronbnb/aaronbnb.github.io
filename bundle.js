@@ -184,6 +184,7 @@ class Board {
     if (this.update) {
       this.update = false; // only update once
     }
+    //
   }
 
   incorrectGuess() {
@@ -247,7 +248,9 @@ class Game {
     this.round = 0;
     // this.board.displayQuote();
     this.score = 0;
-    this.answers = ["George Washington", "Thomas Jefferson"];
+    this.answers = [
+      ["Wayne Gretzky", "Gretzky"]
+    ];
     this.answer.oninput=this.evaluateGuess.bind(this);
 
   }
@@ -306,19 +309,17 @@ class Game {
   }
 
   play() {
-    let i = 0;
-    while (i < 5) {
-      this.board.setUpRound(i);
-      this.board.coverHints();
-      this.board.displayQuote();
+
+      this.board.setUpRound(this.round);
+      // this.board.displayQuote(this.round);
       this.evaluateGuess;
-    }
+      this.round += 1;
   }
 
   evaluateGuess(e) {
     e.preventDefault();
     this.displayQuote();
-    if (this.answer.value === 'Thomas Jefferson' || this.answer.value === 'Jefferson') {
+    if (this.answer.value === this.answers[this.round][0] || this.answer.value === this.answers[this.round][1]) {
       this.board.displayWin();
     } else {
       this.board.incorrectGuess();
