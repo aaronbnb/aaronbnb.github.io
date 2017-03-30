@@ -78,7 +78,7 @@ class Board {
     this.stage = new createjs.Stage('testCanvas');
     this.hints = [
       ["Known as the Great One", "Canadian Hockey Player", "His daughter Paulina!"],
-      ["Senator from MA", "They have a family curse", "1960s!"]
+      ["Senator from Massachusetts", "They have a family curse", "1960s!"]
     ];
 
     this.reaction;
@@ -163,14 +163,14 @@ class Board {
 	  }
   }
 
-  displayWin() {
+  displayWin(speaker) {
     this.reaction = new createjs.Container();
     let winText = new createjs.Text();
     winText.font = "20px Arial";
-    winText.x = 335;
-    winText.y = 325;
+    winText.x = 245;
+    winText.y = 310;
     winText.color = "#FFFFFF";
-    winText.text = "   You're right\n\n   Press enter for next round";
+    winText.text = `You're right. ${speaker} said it.\n\nPress enter for next round`;
 
     var roundRect = new createjs.Shape();
     roundRect.graphics.beginFill("black").drawRoundRect(240,300,420,100,10,10,10,10);
@@ -355,7 +355,7 @@ class Game {
   evaluateGuess(e) {
     e.preventDefault();
     if (this.answer.value === this.answers[this.round][0] || this.answer.value === this.answers[this.round][1]) {
-      this.board.displayWin();
+      this.board.displayWin(this.answers[this.round]);
       this.score += 1;
       this.answer.value = "";
     }
