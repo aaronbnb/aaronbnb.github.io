@@ -307,16 +307,19 @@ class Game {
     // container.addChild(enterText);
     this.stage.addChild(instructionsContainer);
     this.stage.update();
-
-    this.canvas.onmousedown = function(e) {
+    this.gameStart = () => {
       this.stage.removeChild(instructionsContainer);
       this.stage.update();
       this.play();
-    }.bind(this);
+    };
+
+
+    this.canvas.addEventListener("mousedown", this.gameStart);
 
   }
 
   play() {
+    this.canvas.removeEventListener("mousedown", this.gameStart);
     this.board.setUpRound(this.round);
     this.displayQuote(this.round);
     this.answer.onkeydown = function(e) {
