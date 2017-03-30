@@ -244,6 +244,7 @@ class Game {
     this.canvas = document.getElementById('testCanvas');
     this.timer = timer;
     this.round = 0;
+    this.start = false;
     this.hints = [
       ["Known as the Great One", "Canadian Hockey Player", "His daughter Paulina!"]
     ];
@@ -331,12 +332,12 @@ class Game {
     const quoteContainer = new createjs.Container();
     let quote = new createjs.Text();
     quote.font = "20px Arial";
-    quote.x = 110;
-    quote.y = 125;
+    quote.x = 210;
+    quote.y = 80;
     quote.color = "#FFFFFF";
     quote.text = this.quotes[this.round];
     var roundRect = new createjs.Shape();
-    roundRect.graphics.beginFill("black").drawRoundRect(100,50,500,100,10,10,10,10);
+    roundRect.graphics.beginFill("black").drawRoundRect(200,70,500,100,10,10,10,10);
     quoteContainer.addChild(roundRect);
     quoteContainer.addChild(quote);
     // container.addChild(enterText);
