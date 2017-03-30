@@ -77,11 +77,11 @@ class Board {
     // create stage and point it to the canvas:
     this.stage = new createjs.Stage('testCanvas');
     this.hints = [
-      ["Known as the Great One", "Canadian Hockey Player", "His daughter Paulina!"]
+      ["Known as the Great One", "Canadian Hockey Player", "His daughter Paulina!"],
+      ["Senator from MA", "They have a family curse", "1960s!"]
     ];
-    this.quotes = [
-      "You miss 100% of the shots you don't take"
-    ];
+
+    this.reaction;
   	this.mouseTarget;	// the display object currently under the mouse, or being dragged
   	this.dragStarted;	// indicates whether we are currently in a drag operation
   	this.offset;
@@ -164,7 +164,7 @@ class Board {
   }
 
   displayWin() {
-    const container = new createjs.Container();
+    this.reaction = new createjs.Container();
     let winText = new createjs.Text();
     winText.font = "20px Arial";
     winText.x = 335;
@@ -174,10 +174,10 @@ class Board {
 
     var roundRect = new createjs.Shape();
     roundRect.graphics.beginFill("black").drawRoundRect(240,300,420,100,10,10,10,10);
-    container.addChild(roundRect);
-    container.addChild(winText);
+    this.reaction.addChild(roundRect);
+    this.reaction.addChild(winText);
     // container.addChild(enterText);
-    this.stage.addChild(container);
+    this.stage.addChild(this.reaction);
     this.stage.update();
     if (this.update) {
       this.update = false; // only update once
@@ -186,7 +186,7 @@ class Board {
   }
 
   incorrectGuess() {
-    const container = new createjs.Container();
+    this.reaction = new createjs.Container();
     let winText = new createjs.Text();
     winText.font = "20px Arial";
     winText.x = 255;
@@ -197,10 +197,10 @@ class Board {
 
     var roundRect = new createjs.Shape();
     roundRect.graphics.beginFill("black").drawRoundRect(240,300,420,100,10,10,10,10);
-    container.addChild(roundRect);
+    this.reaction.addChild(roundRect);
     container.addChild(winText);
     // container.addChild(enterText);
-    this.stage.addChild(container);
+    this.stage.addChild(this.reaction);
     this.stage.update();
     if (this.update) {
       this.update = false; // only update once
@@ -330,7 +330,7 @@ class Game {
         this.stage.removeAllChildren();
         this.stage.update();
         this.round += 1;
-        this.play;
+        this.play();
       }
     }.bind(this);
   }
@@ -356,7 +356,8 @@ class Game {
     e.preventDefault();
     if (this.answer.value === this.answers[this.round][0] || this.answer.value === this.answers[this.round][1]) {
       this.board.displayWin();
-    } else {
+    }
+    else {
       this.board.incorrectGuess();
     }
   }
