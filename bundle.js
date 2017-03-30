@@ -249,8 +249,8 @@ class Game {
       ["Known as the Great One", "Canadian Hockey Player", "His daughter Paulina!"]
     ];
     this.answers = [
-    ["Wayne Gretzky", "Gretzky"],
-    ["John Kennedy", "Kennedy"]
+    ["wayne gretzky", "gretzky"],
+    ["john kennedy", "kennedy"]
                     ];
     this.quotes = [
       "You miss 100% of the shots you don't take",
@@ -354,10 +354,11 @@ class Game {
 
   evaluateGuess(e) {
     e.preventDefault();
-    if (this.answer.value === this.answers[this.round][0] || this.answer.value === this.answers[this.round][1]) {
-      this.board.displayWin(this.answers[this.round]);
-      this.score += 1;
-      this.answer.value = "";
+    if (this.answer.value.toLowerCase() === this.answers[this.round][0] ||
+        this.answer.value.toLowerCase() === this.answers[this.round][1]) {
+        this.board.displayWin(this.answers[this.round][0]);
+        this.score += 1;
+        this.answer.value = "";
     }
     else {
       this.board.incorrectGuess();
