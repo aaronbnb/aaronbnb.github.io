@@ -99,7 +99,7 @@ class Board {
 
   setUpRound(round) {
 		const container = new createjs.Container();
-
+    debugger;
 		  for (var i = 0; i < 3; i++) {
 			  let text = new createjs.Text();
   			text.font = "20px Arial";
@@ -325,6 +325,7 @@ class Game {
   }
 
   play() {
+    debugger;
     this.board.setUpRound(this.round);
     displayQuote(this.round);
     this.answer.onenter = function(e) {
