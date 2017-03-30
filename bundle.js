@@ -76,7 +76,13 @@ class Board {
     this.canvas = document.getElementById('testCanvas');
     // create stage and point it to the canvas:
     this.stage = new createjs.Stage('testCanvas');
-
+    this.hints = [
+      ["Known as the Great One", "Canadian Hockey Player", "His daughter Paulina!"]
+    ];
+    this.answers = ["Wayne Gretzky"];
+    this.quotes = [
+      "You miss 100% of the shots you don't take"
+    ];
   	this.mouseTarget;	// the display object currently under the mouse, or being dragged
   	this.dragStarted;	// indicates whether we are currently in a drag operation
   	this.offset;
@@ -91,15 +97,15 @@ class Board {
 		this.image.src = "./book.png";
   }
 
-  setUpRound() {
+  setUpRound(round) {
 		const container = new createjs.Container();
-		const hints = ["Said in 1776", "He owned slaves", "From Virginia"]
+
 		  for (var i = 0; i < 3; i++) {
 			  let text = new createjs.Text();
   			text.font = "20px Arial";
   			text.x = this.canvas.width * Math.random() | 0;
   			text.y = this.canvas.height * Math.random() | 0;
-  			text.text = hints[i];
+  			text.text = this.hints[round][i];
   			this.stage.addChild(text);
 		  }
       this.stage.update();
@@ -202,14 +208,14 @@ class Board {
     }
   }
 
-  displayQuote() {
+  displayQuote(round) {
     const quoteContainer = new createjs.Container();
     let quote = new createjs.Text();
     quote.font = "20px Arial";
     quote.x = 110;
     quote.y = 125;
     quote.color = "#FFFFFF";
-    quote.text = "Give me liberty or give me death";
+    quote.text = this.quotes[round];
     var roundRect = new createjs.Shape();
     roundRect.graphics.beginFill("black").drawRoundRect(100,50,500,100,10,10,10,10);
     quoteContainer.addChild(roundRect);
@@ -238,6 +244,7 @@ class Game {
     this.answer = document.getElementById("answer");
     this.canvas = document.getElementById('testCanvas');
     this.timer = timer;
+    this.round = 0;
     // this.board.displayQuote();
     this.score = 0;
     this.answers = ["George Washington", "Thomas Jefferson"];
@@ -294,14 +301,14 @@ class Game {
     this.canvas.onmousedown = function(e) {
       this.stage.removeChild(instructionsContainer);
       this.stage.update();
-      this.displayQuote();
+      this.play();
     }.bind(this);
   }
 
   play() {
     let i = 0;
     while (i < 5) {
-      this.board.displayHints();
+      this.board.setUpRound(i);
       this.board.coverHints();
       this.board.displayQuote();
       this.evaluateGuess;
