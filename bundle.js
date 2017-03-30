@@ -349,6 +349,7 @@ class Game {
     if (this.answer.value === this.answers[this.round][0] || this.answer.value === this.answers[this.round][1]) {
       this.board.displayWin();
       this.score += 1;
+      this.answer.value = "";
     }
     else {
       this.board.incorrectGuess();
