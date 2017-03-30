@@ -311,8 +311,9 @@ class Game {
     this.canvas.onmousedown = function(e) {
       this.stage.removeChild(instructionsContainer);
       this.stage.update();
+      this.play();
     }.bind(this);
-    this.play();
+
   }
 
   play() {
