@@ -343,7 +343,7 @@ class Game {
     quote.x = 110;
     quote.y = 125;
     quote.color = "#FFFFFF";
-    quote.text = this.quotes[round];
+    quote.text = this.quotes[this.round];
     var roundRect = new createjs.Shape();
     roundRect.graphics.beginFill("black").drawRoundRect(100,50,500,100,10,10,10,10);
     quoteContainer.addChild(roundRect);
