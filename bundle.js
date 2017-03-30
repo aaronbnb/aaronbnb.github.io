@@ -79,7 +79,6 @@ class Board {
     this.hints = [
       ["Known as the Great One", "Canadian Hockey Player", "His daughter Paulina!"]
     ];
-    this.answers = ["Wayne Gretzky"];
     this.quotes = [
       "You miss 100% of the shots you don't take"
     ];
@@ -355,7 +354,6 @@ class Game {
 
   evaluateGuess(e) {
     e.preventDefault();
-    this.displayQuote();
     if (this.answer.value === this.answers[this.round][0] || this.answer.value === this.answers[this.round][1]) {
       this.board.displayWin();
     } else {
@@ -384,7 +382,7 @@ document.addEventListener('DOMContentLoaded', () => {
   let game = new Game(board, timer);
 
   // game.showTitle();
-  board.setUpRound(0);
+    game.showTitle();
   // game.play();
   window.canvas = document.getElementById('testCanvas');
   window.stage = board.stage;
