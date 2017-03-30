@@ -255,16 +255,8 @@ class Game {
       "You miss 100% of the shots you don't take",
       "My fellow Americans, ask not what your country can do for you, ask what you can do for your country"
     ];
-
-
-
-
-
     // this.board.displayQuote();
     this.score = 0;
-    this.answers = [
-      ["Wayne Gretzky", "Gretzky"]
-    ];
     this.answer.oninput=this.evaluateGuess.bind(this);
 
   }
@@ -356,6 +348,7 @@ class Game {
     e.preventDefault();
     if (this.answer.value === this.answers[this.round][0] || this.answer.value === this.answers[this.round][1]) {
       this.board.displayWin();
+      this.score += 1;
     }
     else {
       this.board.incorrectGuess();
