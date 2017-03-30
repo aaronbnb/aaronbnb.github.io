@@ -76,11 +76,6 @@ class Board {
     this.canvas = document.getElementById('testCanvas');
     // create stage and point it to the canvas:
     this.stage = new createjs.Stage('testCanvas');
-    this.hints = [
-      ["Known as the Great One", "Canadian Hockey Player", "His daughter Paulina!"],
-      ["Senator from Massachusetts", "They have a family curse", "1960s!"]
-    ];
-
     this.reaction;
   	this.mouseTarget;	// the display object currently under the mouse, or being dragged
   	this.dragStarted;	// indicates whether we are currently in a drag operation
@@ -96,14 +91,14 @@ class Board {
 		this.image.src = "./book.png";
   }
 
-  setUpRound(round) {
+  setUpRound(round, hints) {
 		const container = new createjs.Container();
 		  for (var i = 0; i < 3; i++) {
 			  let text = new createjs.Text();
   			text.font = "20px Arial";
   			text.x = this.canvas.width * Math.random() | 0;
   			text.y = this.canvas.height * Math.random() | 0;
-  			text.text = this.hints[round][i];
+  			text.text = hints[round][i];
   			this.stage.addChild(text);
 		  }
       this.stage.update();
@@ -246,15 +241,29 @@ class Game {
     this.round = 0;
     this.start = false;
     this.hints = [
-      ["Known as the Great One", "Canadian Hockey Player", "His daughter Paulina!"]
+      ["Known as the Great One", "Canadian Hockey Player", "His daughter Paulina!"],
+      ["Senator from Massachusetts", "Face of the 1960s", "Captained PT109"],
+      ["British Prime Minister", "World War II Leader", "Pudgy face"],
+      ["Born in Stratford-upon-Avon", "Wrote 38 plays", "The GOAT of Theater"],
+      ["Has self-titled $700 sneakers", "College Dropout...was he?", "Kim Kardashian's hubby"]
+
     ];
     this.answers = [
-    ["Wayne Gretzky", "gretzky"],
-    ["John Kennedy", "kennedy"]
+    "Wayne Gretzky",
+    "John Kennedy",
+    "Winston Churchill",
+    "William Shakespeare",
+    "Kanye West"
+
                     ];
     this.quotes = [
       "You miss 100% of the shots you don't take",
-      "My fellow Americans, ask not what your country can do for you, ask what you can do for your country"
+      "My fellow Americans, ask not what your country can do for you, \n\n"
+      + "ask what you can do for your country",
+      "He has all the virtues I dislike and none of the vices I admire.",
+      "All the world's a stage, and all the men and women merely players\n\n"
+      + "they have their exits and their entrances; and one man in his time plays many parts",
+      "Life is like a box of chocolate, my momma told go to school and get my doctorate"
     ];
     // this.board.displayQuote();
     this.score = 0;
@@ -323,7 +332,7 @@ class Game {
 
   play() {
     this.canvas.onmousedown = null;
-    this.board.setUpRound(this.round);
+    this.board.setUpRound(this.round, this.hints[this.round]);
     this.displayQuote(this.round);
     this.answer.onkeydown = function(e) {
       if (e.keyCode === 13) {
@@ -354,9 +363,9 @@ class Game {
 
   evaluateGuess(e) {
     e.preventDefault();
-    if (this.answer.value.toLowerCase() === (this.answers[this.round][0]).toLowerCase() ||
-        this.answer.value.toLowerCase() === (this.answers[this.round][1]).toLowerCase()) {
-        this.board.displayWin(this.answers[this.round][0]);
+    if (this.answer.value.toLowerCase() === (this.answers[this.round]).toLowerCase() ||
+        this.answer.value.toLowerCase() === (this.answers[this.round].split(" ")[1]).toLowerCase()) {
+        this.board.displayWin(this.answers[this.round]);
         this.score += 1;
         this.answer.value = "";
     }
