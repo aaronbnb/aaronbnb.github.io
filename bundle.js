@@ -279,8 +279,8 @@ class Game {
       "It is difficult to get a man to understand something,\n\n"
       + "when his salary depends upon his not understanding it!",
       "It was the best of times, it was the worst of times",
-      "I hated every minute of training, but I said, 'Don't \n\n"
-      + "quit. Suffer now and live the rest of your life as a champion.",
+      "I hated every minute of training, but I said, 'Don't quit\n\n"
+      + "Suffer now and live the rest of your life as a champion.",
       "“You see things; and you say, ‘Why?’ But I dream things \n\n"
       + "that never were; and I say, ‘Why not?’",
       "You say I'm a dreamer but I'm not the only one"
@@ -421,7 +421,7 @@ class Game {
     } else {
       score.text = score.text + "\n\nC'mon, did you at least know the JFK one?";
     }
-    score.text = score.text + "\n\n" + `It took you ${this.time}. Not bad.`;
+    score.text = score.text + "\n\n" + `It took you ${this.timer.time}. Not bad.`;
     var roundRect = new createjs.Shape();
     roundRect.graphics.beginFill("black").drawRoundRect(200,50,500,350,10,10,10,10);
     scoreContainer.addChild(roundRect);
@@ -475,7 +475,7 @@ class Timer {
     const startDate = Date.now();
 
     // Update the count down every 1 second
-    const x = setInterval(function() {
+    this.x = setInterval(function() {
       // Get todays date and time
       let now = new Date().getTime();
 
@@ -487,22 +487,24 @@ class Timer {
       let seconds = Math.floor((distance % (1000 * 60)) / 1000);
       if (minutes < 1) {
         minutes = "00";
-      } else if (minutes >= 1 && minutes <= 10) {
+      } else if (minutes >= 1 && minutes < 10) {
         minutes = `0${minutes}`;
       }
 
       if (seconds < 1) {
         seconds = "00";
-      } else if (seconds >= 1 && seconds <= 10) {
+      } else if (seconds >= 1 && seconds < 10) {
         seconds = `0${seconds}`;
       }
       // Output the result in an element with id="demo"
-      this.time = document.getElementById("timer").innerHTML =
-      minutes + ":" + seconds;
+      this.time = minutes + ":" + seconds;
+      document.getElementById("timer").innerHTML =
+      "   " + minutes + ":" + seconds;
     }, 1000);
   }
 
   stopTimer() {
+    clearInterval(this.x);
     document.getElementById("timer").innerHTML = this.time;
   }
 }
