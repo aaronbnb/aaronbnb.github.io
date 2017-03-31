@@ -402,6 +402,7 @@ class Game {
   }
 
   displayScoreCard() {
+    this.timer.stopTimer();
     const scoreContainer = new createjs.Container();
     let score = new createjs.Text();
     score.font = "20px Arial";
@@ -420,6 +421,7 @@ class Game {
     } else {
       score.text = score.text + "\n\nC'mon, did you at least know the JFK one?";
     }
+    score.text = score.text + "\n\n" + `It took you ${this.time}. Not bad.`;
     var roundRect = new createjs.Shape();
     roundRect.graphics.beginFill("black").drawRoundRect(200,50,500,350,10,10,10,10);
     scoreContainer.addChild(roundRect);
@@ -465,7 +467,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
 class Timer {
   constructor() {
-    document.getElementById("timer").innerHTML = "00:00";
+    this.time = document.getElementById("timer").innerHTML = "00:00";
   }
 
   startTimer() {
@@ -495,9 +497,13 @@ class Timer {
         seconds = `0${seconds}`;
       }
       // Output the result in an element with id="demo"
-      document.getElementById("timer").innerHTML =
+      this.time = document.getElementById("timer").innerHTML =
       minutes + ":" + seconds;
     }, 1000);
+  }
+
+  stopTimer() {
+    document.getElementById("timer").innerHTML = this.time;
   }
 }
 
