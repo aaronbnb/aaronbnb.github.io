@@ -306,7 +306,7 @@ class Game {
     gameTitle.x = 208;
     gameTitle.y = 125;
     gameTitle.color = "#FFFFFF";
-    gameTitle.text = "Y o u  N e e d  T o  H i t  T h e  B o o k s!"
+    gameTitle.text = "Y o u   N e e d   T o   H i t   T h e   B o o k s !"
     let title = new createjs.Text();
     title.font = "18px Arial";
     title.x = 208;

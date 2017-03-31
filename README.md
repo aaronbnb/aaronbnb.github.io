@@ -1,77 +1,86 @@
-## Who Said That? Guess the Speaker!
+# You Need To Hit The Books!
+[You Need To Hit The Books live][game] **Play the game!**
 
-### Background
+[game]: https://aaronbnb.github.io/
 
-Who Said That? gives you a quotation and you have to guess the speaker. The game give you three hints and then give you a score, deducting a point for each hint activated, at the end of the game at how well you know the 10 moderately famous quotes. With each hint, we'll display a provide a hint to give more context about the quotation in creative ways such as pictures and perhaps audio clips.
+You Need To Hit The Books! is a JavaScript quote-guessing quiz game, sharing some of my favorite thoughts. You Need To Hit The Books! records players' scores and time to get through the game's ten rounds. Players guess the quotes and have to hit the books to reveal hints.
 
-### Functionality & MVP
+## Features & Implementation
 
-With Who Said That!, users will be able to:
+You Need To Hit The Books! relies on 'vanilla' JavaScript for logic and uses the Easel.js library to interact with the HTML5 'canvas' element.
 
-- [ ] Start, pause, and reset the game
-- [ ] Answer questions and select hints
-- [ ] See pictures of the speaker after each question
+### Drag + Drop Icons
 
-In addition, this project will include:
+  The game uses Easel.js' to implement drag and drop functionality on the book icons, allowing players to reveal hints if they don't know the quotation.
 
-- [ ] An About sidebar
-- [ ] A view window for the DOM
-- [ ] A production Readme
-
-### Wireframes
-
-This app will consist of a single screen with game board, game controls, and nav links to the Github, my LinkedIn, and an About sidebar with game directions. Game controls will include Start, Stop, and Reset buttons that can be activated via cursor or keyboard shortcuts. The about sidebar is next to the game window. The game window will have a score box at the top right hand corner. The score will measure either hints use or time to figure out the quotes. Each question will display quote at the center top. There is a text input bar that requires either exact match for the speaker or just their last name. The hints will be hidden under book icons that will be dragged out of the way, revealing the quote, thus incorporating Easel.js. After each question, display a picture of the speaker.
-
-![wireframes](images/js_wireframe.jpeg)
-
-### Architecture and Technologies
-
-This project will be implemented with the following technologies:
-
-- JavaScript and `React` for overall structure and game logic,
-- `Easel.js` with `HTML5 Canvas` for DOM manipulation and rendering,
-- Webpack to bundle and serve up the various scripts.
-
-In addition to the webpack entry file, there will be three scripts involved in this project:
-
-`game.js`: this script will handle the logic for creating and updating the necessary `Easel.js` elements and rendering them to the DOM.
-
-`sidebar.js`: game instructions and keyboard commands
-
-`score.js`: this script will handle the scoring logic behind the scenes, devising a score based on time.
-
-`hint.js`: this lightweight script will house the `hint` objects, placing them randonmly in the game window, being hidden by the book icons powered by `Easel.js` that can be dragged or dropped out of the way.
-
-### Implementation Timeline
-
-**Day 1**: Setup all necessary Node modules, including getting webpack up and running and `Easel.js` installed.  Create `webpack.config.js` as well as `package.json`.  Write a basic entry file and the bare bones of all 3 scripts outlined above.  Gain fluency in `Easel.js`.  Goals for the day:
-
-- Get a green bundle with `webpack`
-- Learn enough `Easel.js` to render an object to the `Canvas` element
-- Style a sharp 'instructions box'
-
-**Day 2**: Dedicate this day to learning the `Easel.js` API.  First, build out the `hint.js` object to connect to the `Game` object.  Then, use `game.js` to create and render at least one question and associated hints, hidden by the book icons, powered by `Easel.js`.  Build in the ability to move books to reveal quotes.  Goals for the day:
-
-- Complete the `game.js` module (constructor, update functions)
-- Render the books to the `Canvas` using `Easel.js`
-- Render the famous speaker picture after each question.
-- Make each book in the game window clickable
-- Build in keyboard action rather than just cursor action
-
-  **Day 3**: Create the `score.js` logic backend.  Build out logic for devising score based on time spent playing per question or on how many hints were viewed. Incorporate the logic into the `game.js` rendering.  Goals for the day:
-
-- Export an `Automata` object with correct type and handling logic
-- Have a functional grid on the `Canvas` frontend that correctly handles iterations from one generation of the game to the next
+  You Need To Hit The Books! sets up a multi-layered canvas. For each round of the game, it renders quotes as the base layer. It then sets up a layer, with bitmaps on each book image. In `Board`, each book icon is given a random size, rotation, and location on the canvas. Event listeners are then placed on each icon, measuring offset from the book icons' original coordinates, providing the drag and drop functionality.
 
 
-**Day 4**: Install the controls for the user to interact with the game.  Style the frontend, making it polished and professional.  Goals for the day:
+    `Board` drag and drop method:
+    ```javascript
+    for (var i = 1; i < 30; i++) {
+      let book = (i % 2 === 0) ? this.image1 : this.image2;
+      let bitmap = new createjs.Bitmap(book);
+      container.addChild(bitmap);
+      bitmap.x = .9 * this.canvas.width * Math.random() | 0;
+      bitmap.y = .9 * this.canvas.height * Math.random() | 0;
+      bitmap.rotation = 360 * Math.random() | 0;
+      bitmap.regX = bitmap.image.width / 2 | 0;
+      bitmap.regY = bitmap.image.height / 2 | 0;
+      bitmap.scaleX = bitmap.scaleY = bitmap.scale = Math.random() * 0.4 + 0.6;
+      bitmap.name = "bmp_" + i;
+      bitmap.cursor = "pointer";
 
-- Tighten up the UI and graphics for the game, particularly the game instructions.
+      bitmap.addEventListener("mousedown", function (evt) {
+        var o = evt.target;
+        o.parent.addChild(o);
+        o.offset = {x: o.x - evt.stageX, y: o.y - evt.stageY};
+      }.bind(this));
 
+      bitmap.addEventListener("pressmove", function (evt) {
+        var o = evt.target;
+        o.x = evt.stageX + o.offset.x;
+        o.y = evt.stageY + o.offset.y;
 
-### Bonus features
+        this.update = true;
+      }.bind(this));
 
-There are many directions this cellular automata engine could eventually go.  Some anticipated updates are:
+      bitmap.addEventListener("rollover", function (evt) {
+        var o = evt.target;
+        o.scaleX = o.scaleY = o.scale * 1.2;
+        this.update = true;
+      }.bind(this));
 
-- [ ] Add options for different question sets
-- [ ] Allow audio clips for hints
+      bitmap.addEventListener("rollout", function (evt) {
+        var o = evt.target;
+        o.scaleX = o.scaleY = o.scale;
+        this.update = true;
+      }.bind(this));
+    }
+    this.stage.update();
+    ```
+
+### Timer
+
+  A simple `Timer` is used to add another level of competition and scoring to the game. The timer initiates at game start and stops at conclusion of final round.
+
+### Answer Input
+
+  Using asynchronous functions, players' answer input is dynamically evaluated, allowing users to try different guesses before submitting an answer. The game then clears the answer field.
+
+![tag screenshot](docs/round.png)
+## Future Directions for the Project
+
+In addition to the features already implemented, I will continue to work on the game, adding additional features to improve player experience.
+
+### Randomizing Quotations
+
+  I plan to add a separate CSV file with quotes so that the rounds and quotes/hints can be randomized. I will also add difficulty levels to each quotes, allowing players to select the difficulty for the game.
+
+### Persisting scores
+
+  I will add a backend so that users can submit and save high scores and see the leaderboard at the end of the game.
+
+### Links To Github Repo/Profile
+
+  I plan to add an event listener to scorecard at the end, sending users to either the repo for the game or my user project.
