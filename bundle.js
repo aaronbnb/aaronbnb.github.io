@@ -95,7 +95,7 @@ class Board {
 		const container = new createjs.Container();
 		  for (var i = 0; i < 3; i++) {
 			  let text = new createjs.Text();
-  			text.font = "20px Arial";
+  			text.font = "18px Arial";
   			text.x = this.canvas.width * Math.random() | 0;
   			text.y = this.canvas.height * Math.random() | 0;
   			text.text = hints[i];
@@ -258,9 +258,10 @@ class Game {
                     ];
     this.quotes = [
       "You miss 100% of the shots you don't take",
-      "My fellow Americans, ask not what your country can do for you, \n\n"
-      + "ask what you can do for your country",
-      "He has all the virtues I dislike and none of the vices I admire.",
+      "My fellow Americans, ask not what your country can \n\n"
+      + "do for you, ask what you can do for your country",
+      "He has all the virtues I dislike and none of the vices \n\n"
+      + "I admire.",
       "All the world's a stage, and all the men and women merely players\n\n"
       + "they have their exits and their entrances; and one man in his time plays many parts",
       "Life is like a box of chocolate, my momma told go to school and get my doctorate"
