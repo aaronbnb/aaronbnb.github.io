@@ -244,7 +244,12 @@ class Game {
       ["Senator from Massachusetts", "Face of the 1960s", "Captained PT109"],
       ["British Prime Minister", "World War II Leader", "Pudgy face"],
       ["Born in Stratford-upon-Avon", "Wrote 38 plays", "The GOAT of Theater"],
-      ["Has self-titled $700 sneakers", "College Dropout...was he?", "Kim Kardashian's hubby"]
+      ["Has self-titled $700 sneakers", "College Dropout...was he?", "Kim Kardashian's hubby"],
+      ["Wrote The Jungle", "Prominent labor activist/socialist", "Ran for CA Governor"],
+      ["Tale of Two Cities", "English Industrial Revolution writer", "Please sir, I want more..."],
+      ["The Greatest", "Refused to participate in Vietnam War", "Heavyweight Champion"],
+      ["Assassinated in CA", "Ran for President in 1968", "New York U.S. Senator"],
+      ["Yoko's husband", "The Beatles are bigger than Jesus", "Killed in 1980"]
 
     ];
     this.answers = [
@@ -252,7 +257,13 @@ class Game {
     "John Kennedy",
     "Winston Churchill",
     "William Shakespeare",
-    "Kanye West"
+    "Kanye West",
+    "Upton Sinclair",
+    "Charles Dickens",
+    "Muhammad Ali",
+    "Robert Kennedy",
+    "John Lennon"
+
 
                     ];
     this.quotes = [
@@ -261,9 +272,19 @@ class Game {
       + "do for you, ask what you can do for your country",
       "He has all the virtues I dislike and none of the vices \n\n"
       + "I admire.",
-      "All the world's a stage, and all the men and women merely players\n\n"
-      + "they have their exits and their entrances; and one man in his time plays many parts",
-      "Life is like a box of chocolate, my momma told go to school and get my doctorate"
+      "All the world's a stage, and all the men and women \n\n"
+      + "merely players; they have their exits and their entrances",
+      "Life is like a box of chocolate, my momma told go \n\n"
+      + "to school and get my doctorate",
+      "It is difficult to get a man to understand something,\n\n"
+      + " when his salary depends upon his not understanding it!",
+      "It was the best of times, it was the worst of times",
+      "I hated every minute of training, but I said, 'Don't \n\n" +
+      + "quit. Suffer now and live the rest of your life as a champion.",
+      "“You see things; and you say, ‘Why?’ But I dream things \n\n"
+      + "that never were; and I say, ‘Why not?’",
+      "You say I'm a dreamer but I'm not the only one"
+
     ];
     // this.board.displayQuote();
     this.score = 0;
@@ -301,14 +322,15 @@ class Game {
   displayInstructions() {
     const instructionsContainer = new createjs.Container();
     let instructions = new createjs.Text();
-    instructions.font = "20px Arial";
+    instructions.font = "19px Arial";
     instructions.x = 210;
     instructions.y = 125;
     instructions.color = "#FFFFFF";
     instructions.text = "Here's how it works...\n\n" +
     "We'll give you a quote. Type in the speaker.\n\n" +
     "We'll be generous. Last name is good enough.\n\n" +
-    "If you don't know, move the books to reveal hints";
+    "If you don't know, move the books to reveal hints\n\n" +
+    "Oh and we'll be taking time so move fast! Click to start";
     var roundRect = new createjs.Shape();
     roundRect.graphics.beginFill("black").drawRoundRect(200,100,500,300,10,10,10,10);
     instructionsContainer.addChild(roundRect);
@@ -332,7 +354,7 @@ class Game {
   }
 
   play() {
-    if(this.round === 5) {
+    if(this.round === 10) {
       this.displayScoreCard();
       return;
     }
@@ -387,16 +409,16 @@ class Game {
     score.y = 80;
     score.color = "#FFFFFF";
     score.text = `You scored ${this.score} points`;
-    if(this.score >= 4) {
+    if(this.score >= 8) {
       score.text = score.text + "!\n\nThat's really good. You don't need to hit the books."
       + "\n\nOr actually, you probably already did in the past";
-    } else if (this.score >= 2){
+    } else if (this.score >= 5){
       score.text = score.text + "\n\nThat's mediocre. Be better than mediocre.\n\n"
       + "Pick up a book, not just Facebook. Sorry for preachiness.";
-    } else if (this.score === 1){
-      score.text = score.text + "\n\nUmmm...c'mon, did you really try?"
+    } else if (this.score >= 3){
+      score.text = score.text + "\n\nUmmm...c'mon, did you really try?";
     } else {
-      score.text = score.text + "\n\nC'mon, you didn't know the JFK one?"
+      score.text = score.text + "\n\nC'mon, did you at least know the JFK one?";
     }
     var roundRect = new createjs.Shape();
     roundRect.graphics.beginFill("black").drawRoundRect(200,50,500,350,10,10,10,10);
@@ -443,7 +465,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
 class Timer {
   constructor() {
-    document.getElementById("timer").innerHTML = ".";
+    document.getElementById("timer").innerHTML = "00:00";
   }
 
   startTimer() {
