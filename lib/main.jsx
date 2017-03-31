@@ -5,7 +5,7 @@ const Timer = require('./timer');
 document.addEventListener('DOMContentLoaded', () => {
   window.scroll(0, 300);
   let board = new Board();
-  let timer = new Timer(50);
+  let timer = new Timer();
   let game = new Game(board, timer);
 
   // game.showTitle();

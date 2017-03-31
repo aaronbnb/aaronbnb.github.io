@@ -424,7 +424,7 @@ const Timer = __webpack_require__(35);
 document.addEventListener('DOMContentLoaded', () => {
   window.scroll(0, 300);
   let board = new Board();
-  let timer = new Timer(50);
+  let timer = new Timer();
   let game = new Game(board, timer);
 
   // game.showTitle();
@@ -443,7 +443,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
 class Timer {
   constructor() {
-    document.getElementById("timer").innerHTML = "";
+    document.getElementById("timer").innerHTML = ".";
   }
 
   startTimer() {
