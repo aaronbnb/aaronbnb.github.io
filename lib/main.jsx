@@ -9,7 +9,7 @@ document.addEventListener('DOMContentLoaded', () => {
   let game = new Game(board, timer);
 
   // game.showTitle();
-    game.showTitle();
+  game.showTitle();
   // game.play();
   window.canvas = document.getElementById('testCanvas');
   window.stage = board.stage;

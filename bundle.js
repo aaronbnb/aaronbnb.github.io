@@ -301,15 +301,22 @@ class Game {
 
   showTitle() {
     const titleContainer = new createjs.Container();
+    let gameTitle = new createjs.Text();
+    gameTitle.font = "20px Helvetica";
+    gameTitle.x = 210;
+    gameTitle.y = 125;
+    gameTitle.color = "#FFFFFF";
+    gameTitle.text = "You Need To Hit The Books!"
     let title = new createjs.Text();
     title.font = "20px Arial";
-    title.x = 210;
+    title.x = 410;
     title.y = 125;
     title.color = "#FFFFFF";
     title.text = "Press any key or click the mouse\n\nBasically do anything to play!";
     var roundRect = new createjs.Shape();
     roundRect.graphics.beginFill("#aaaaaa").drawRoundRect(200,100,500,300,10,10,10,10);
     titleContainer.addChild(roundRect);
+    titleContainer.addChild(gameTitle);
     titleContainer.addChild(title);
     // container.addChild(enterText);
     this.stage.addChild(titleContainer);
@@ -455,7 +462,7 @@ document.addEventListener('DOMContentLoaded', () => {
   let game = new Game(board, timer);
 
   // game.showTitle();
-    game.showTitle();
+  game.showTitle();
   // game.play();
   window.canvas = document.getElementById('testCanvas');
   window.stage = board.stage;
