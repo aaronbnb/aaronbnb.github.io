@@ -505,7 +505,7 @@ class Timer {
       this.time = minutes + ":" + seconds;
       document.getElementById("timer").innerHTML =
       "   " + minutes + ":" + seconds;
-    }, 1000);
+    }, 1000).bind(this);
   }
 
   stopTimer() {
