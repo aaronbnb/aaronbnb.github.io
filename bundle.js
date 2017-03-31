@@ -239,7 +239,6 @@ class Game {
     this.canvas = document.getElementById('testCanvas');
     this.timer = timer;
     this.round = 0;
-    this.start = false;
     this.hints = [
       ["Known as the Great One", "Canadian Hockey Player", "His daughter Paulina!"],
       ["Senator from Massachusetts", "Face of the 1960s", "Captained PT109"],
@@ -326,6 +325,7 @@ class Game {
     this.canvas.onmousedown = function(e) {
       this.stage.removeChild(instructionsContainer);
       this.stage.update();
+      this.timer.startTimer();
       this.play();
     }.bind(this);
 
@@ -441,46 +441,7 @@ document.addEventListener('DOMContentLoaded', () => {
 /***/ 35:
 /***/ (function(module, exports) {
 
-class Timer {
-  constructor(total) {
-    console.log("new timer");
-    this.seconds = 60;
-    this.roundInterval;
-
-    this.decrementSeconds = this.decrementSeconds.bind(this);
-    this.reset = this.reset.bind(this);
-  }
-
-  start (allWordsGuessed, endRound) {
-    this.roundInterval = setInterval( ()=> {
-      if (this.seconds && allWordsGuessed) {
-        this.decrementSeconds();
-        $('#timer').text(`0:${this.seconds}`);
-      } else {
-        this.reset();
-        endRound();
-      }
-    }, 1000);
-  }
-
-  decrementSeconds() {
-    this.seconds-- ;
-  }
-
-  pause(){
-    if (this.seconds) {
-      clearInterval(this.roundInterval);
-    }
-  }
-
-  reset(){
-    clearInterval(this.roundInterval);
-    this.seconds = 60;
-  }
-}
-
-module.exports = Timer;
-
+throw new Error("Module parse failed: /Users/aaronfarber/aaronbnb.github.io/lib/timer.js Unexpected token (63:0)\nYou may need an appropriate loader to handle this file type.\n| // }\n| \n| module.exports = Timer;\n| ");
 
 /***/ })
 
