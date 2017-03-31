@@ -284,7 +284,7 @@ class Game {
       "It was the best of times, it was the worst of times",
       "I hated every minute of training, but I said, 'Don't quit\n\n"
       + "Suffer now and live the rest of your life as a champion.",
-      "“You see things; and you say, ‘Why?’ But I dream things \n\n"
+      "“You see things and you say, ‘Why?’ But I dream things \n\n"
       + "that never were; and I say, ‘Why not?’",
       "You say I'm a dreamer but I'm not the only one"
 
@@ -470,7 +470,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
 class Timer {
   constructor() {
-    this.time = document.getElementById("timer").innerHTML = "00:00";
+    this.time = "";
+    this.displayTime = "";
+    document.getElementById("timer").innerHTML = "00:00";
   }
 
   startTimer() {
@@ -507,6 +509,9 @@ class Timer {
   }
 
   stopTimer() {
+    debugger;
+    this.displayTime = this.time;
+    Object.freeze(this.displayTime);
     clearInterval(this.x);
     document.getElementById("timer").innerHTML = this.time;
   }
