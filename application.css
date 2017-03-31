@@ -38,7 +38,7 @@ canvas {
   letter-spacing: 1px;
   border: 1px solid black;
   width: 100px;
-  display: flex;
+  padding: 0px 5px 0px 5px;
   margin: 0 auto;
   margin-bottom: 5px;
   background: #282828;
