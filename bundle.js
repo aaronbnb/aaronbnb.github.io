@@ -303,13 +303,13 @@ class Game {
     const titleContainer = new createjs.Container();
     let gameTitle = new createjs.Text();
     gameTitle.font = "24px Impact";
-    gameTitle.x = 210;
+    gameTitle.x = 208;
     gameTitle.y = 125;
     gameTitle.color = "#FFFFFF";
-    gameTitle.text = "You Need To Hit The Books!"
+    gameTitle.text = "Y o u  N e e d  T o  H i t  T h e  B o o k s!"
     let title = new createjs.Text();
     title.font = "18px Arial";
-    title.x = 210;
+    title.x = 208;
     title.y = 325;
     title.color = "#FFFFFF";
     title.text = "Press any key or click the mouse\n\nBasically do anything to play!";
