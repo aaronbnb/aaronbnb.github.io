@@ -4,7 +4,7 @@ body {
 }
 
 .test {
-  margin-top: 5%;
+  margin-top: 3%;
   text-align:center;
 }
 
@@ -25,6 +25,15 @@ canvas {
 }
 
 #timer {
+  font-family: sans-serif;
+  font-size: 18px;
+  font-weight: 600;
+  letter-spacing: 1px;
+  border: 1px solid black;
+  width: 100px;
   display: flex;
-  justify-content: center;
+  margin: 0 auto;
+  margin-bottom: 5px;
+  background: #282828;
+  color: white;
 }
