@@ -256,7 +256,7 @@ class Game {
 
                     ];
     this.quotes = [
-      "You miss 100% of the shots you don't take",
+      "     You miss 100% of the shots you don't take",
       "My fellow Americans, ask not what your country can \n\n"
       + "do for you, ask what you can do for your country",
       "He has all the virtues I dislike and none of the vices \n\n"
@@ -469,12 +469,12 @@ class Timer {
 
       if (seconds < 1) {
         seconds = "00";
-      } else if (minutes >= 1 && minutes <= 10) {
+      } else if (seconds >= 1 && seconds <= 10) {
         seconds = `0${seconds}`;
       }
       // Output the result in an element with id="demo"
       document.getElementById("timer").innerHTML =
-      minutes + seconds;
+      minutes + ":" + seconds;
     }, 1000);
   }
 }
