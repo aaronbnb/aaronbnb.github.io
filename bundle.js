@@ -379,7 +379,7 @@ class Game {
     }
   }
 
-  displayScorecard() {
+  displayScoreCard() {
     const scoreContainer = new createjs.Container();
     let score = new createjs.Text();
     score.font = "20px Arial";
